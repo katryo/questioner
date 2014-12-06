@@ -30,6 +30,22 @@ app.get('/answer', function (req, res) {
   }
 });
 
+
+app.get('/latest_user_id', function (req, res) {
+  redis.get('latest_user_id', function(err, reply) {
+    var latestUserId;
+    if (err || !reply) {
+      redis.set('latest_user_id', 4);
+      latestUserId = 4;
+    }
+    else {
+      latestUserId = parseInt(reply) + 1;
+      redis.set('latest_user_id', latestUserId);
+    }
+    res.send({latest_user_id: latestUserId});
+  });
+});
+
 app.get('/set_deadline', function (req, res) {
   if(req.query.admin === 'kat') {
     var deadline = req.query.deadline;

@@ -16,21 +16,21 @@
 -->
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-  <div class="currentUser alert alert-info">
-    ここでのあなたは「{{ currentUser }}」です
-  </div>
-  <div class="answer">
-    <h1>問題</h1>
-    <h3>売神島日？京</h3>
-    <p>？に入る文字を答えよ</p>
-    <div class="form-group">
-      <form action="/answer">
-        <input class="form-control" type="text" name="a">
-        <input type="submit" class="btn btn-block">
-      </form>
+    <div class="currentUser alert alert-info">
+      ここでのあなたは「{{ currentUser }}」です
     </div>
-  </div>
-  <div class="secondsLeft">あと{{ secondsLeft }}秒</div>
+    <div class="answer">
+      <h1>問題</h1>
+      <h3>売神島日？京</h3>
+      <p>？に入る文字を答えよ</p>
+      <div class="form-group">
+        <form action="/answer">
+          <input class="form-control" type="text" name="a">
+          <input type="submit" class="btn btn-block">
+        </form>
+      </div>
+    </div>
+    <div class="secondsLeft">あと{{ secondsLeft }}秒</div>
     <ul id="messages">
       <li v-repeat="messages">
         {{ content }} by {{ user }}
@@ -45,6 +45,7 @@
         <input class="btn btn-block btn-primary" type="submit">
       </form>
     </div>
+    <img src="/public/04_pose.png" alt="hackadoll">
   </div>
 </div>
   <script src="/bower_components/jquery/dist/jquery.min.js"></script>

@@ -22,27 +22,46 @@ $(function() {
         window.setInterval(function() {
           that.secondsLeft = that.secondsLeft - 1;
         }, 1000);
-      }
+      },
+      fetchDeadline: function() {
+        var that = this;
+        $.ajax({
+          type: 'GET',
+          datatype: 'json',
+          url: '/deadline',
+          success: function(data) {
+            var now = Date.now();
+            var deadline = new Date(2014, parseInt(data.mon) - 1, parseInt(data.date), parseInt(data.hour) + 1, parseInt(data.min));
+            var deadlineMinSec = deadline.getTime();
+            var minSecLeft = deadlineMinSec - now;
+            that.secondsLeft = Math.floor(minSecLeft / 1000);
+            that.startTimer();
+          },
+          error: function(err) {
+            console.log(err);
+          }
+        });
+      },
+      fetchLatestUserId: function() {
+        var that = this;
+        console.log('latest');
+        $.ajax({
+          type: 'GET',
+          datatype: 'json',
+          url: '/latest_user_id',
+          success: function(data) {
+            that.$data.currentUser = 'ハッカドール' + data.latest_user_id + '号';
+          },
+          error: function(err) {
+            console.log(err);
+          }
+        });
+      },
     },
     ready: function() {
-      console.log('aaa');
-      var that = this;
-      $.ajax({
-        type: 'GET',
-        datatype: 'json',
-        url: '/deadline',
-        success: function(data) {
-          var now = Date.now();
-          var deadline = new Date(2014, parseInt(data.mon) - 1, parseInt(data.date), parseInt(data.hour) + 1, parseInt(data.min));
-          var deadlineMinSec = deadline.getTime();
-          var minSecLeft = deadlineMinSec - now;
-          that.secondsLeft = Math.floor(minSecLeft / 1000);
-          that.startTimer();
-        },
-        error: function(err) {
-          console.log(err);
-        }
-      });
+      console.log('ready');
+      this.fetchDeadline();
+      this.fetchLatestUserId();
     }
   });
 
