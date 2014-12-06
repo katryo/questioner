@@ -30,7 +30,7 @@ $(function() {
         url: '/deadline',
         success: function(data) {
           var now = Date.now();
-          var deadline = new Date(2014, 11, 6, parseInt(data.hour) + 1, parseInt(data.min));
+          var deadline = new Date(2014, parseInt(data.mon) - 1, parseInt(data.date), parseInt(data.hour) + 1, parseInt(data.min));
           var deadlineMinSec = deadline.getTime();
           var minSecLeft = deadlineMinSec - now;
           that.secondsLeft = Math.floor(minSecLeft / 1000);

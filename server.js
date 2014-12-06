@@ -38,8 +38,8 @@ app.get('/set_deadline', function (req, res) {
 
 app.get('/deadline', function (req, res) {
   redis.get('deadline', function(err, reply) {
-    if(err) {
-      res.send({hour: '21', min: '15'});
+    if(err || !reply) {
+      res.send({mon: 12, date: 16, hour: '21', min: '15'});
     } else {
       if(reply) {
         var tenHourStr = reply.charAt(0);
@@ -48,9 +48,7 @@ app.get('/deadline', function (req, res) {
         var tenMinStr = reply.charAt(2);
         var oneMinStr = reply.charAt(3);
         var min = tenMinStr + oneMinStr;
-        res.send({hour: hour, min:min});
-      } else {
-        res.send({hour: '21', min: '15'});
+        res.send({mon:12, date:16, hour: hour, min:min});
       }
     }
   });
