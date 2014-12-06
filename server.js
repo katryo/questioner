@@ -5,8 +5,21 @@ var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 
 app.use(express.static(__dirname + '/public'));
+app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+
+app.get('/', function (req, res) {
+  console.log(req.query)
+  res.sendFile(__dirname + '/public/index.html');
+})
+
+app.get('/answer', function (req, res) {
+  console.log(req.query)
+  res.sendFile(__dirname + '/public/index.html');
+})
 
 io.on('connection', function(socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.emit('newcomer', { order: '3' });
   socket.on('login', function(username, callback) {
     if (socket.username) return;
 
@@ -23,6 +36,7 @@ io.on('connection', function(socket) {
     console.log('message: ' + message);
     socket.broadcast.emit('lobby message', socket.username, message);
   });
+
 });
 
 http.listen(port, function() {

@@ -3,6 +3,13 @@ $(function() {
   var $window = $(window);
   var $pages = $('.pages');
   var $currentInput;
+  console.log('main');
+
+  var $message = $('.message');
+  $message.on('newcomer', function(data) {
+    console.log(data);
+  });
+
 
   $pages.on('login', function() {
     var $page = $pages.find('.page.login');
