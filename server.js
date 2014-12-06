@@ -23,7 +23,11 @@ app.get('/', function (req, res) {
 });
 
 app.get('/answer', function (req, res) {
-  res.sendFile(__dirname + '/public/index.html');
+  if(req.query.a === '浜') {
+    res.sendFile(__dirname + '/public/answer.html');
+  } else {
+    res.sendFile(__dirname + '/public/index.html');
+  }
 });
 
 app.get('/set_deadline', function (req, res) {
@@ -39,7 +43,7 @@ app.get('/set_deadline', function (req, res) {
 app.get('/deadline', function (req, res) {
   redis.get('deadline', function(err, reply) {
     if(err || !reply) {
-      res.send({mon: 12, date: 16, hour: '21', min: '15'});
+      res.send({mon: 12, date: 16, hour: 21, min: 15});
     } else {
       if(reply) {
         var tenHourStr = reply.charAt(0);
@@ -48,7 +52,7 @@ app.get('/deadline', function (req, res) {
         var tenMinStr = reply.charAt(2);
         var oneMinStr = reply.charAt(3);
         var min = tenMinStr + oneMinStr;
-        res.send({mon:12, date:16, hour: hour, min:min});
+        res.send({mon:12, date:16, hour: parseInt(hour), min: parseInt(min)});
       }
     }
   });

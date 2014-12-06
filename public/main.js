@@ -12,7 +12,10 @@ $(function() {
     },
     methods: {
       appendMessageUpToLimit: function(msg) {
-        console.log(msg);
+        if (this.messages.length > 10) {
+          this.messages.shift();
+        }
+        this.messages.push({ user: this.currentUser, content: msg});
       },
       startTimer: function() {
         var that = this;
@@ -50,7 +53,7 @@ $(function() {
   });
 
   socket.on('chat message', function(msg) {
-    vm.$data.messages.push({ user: vm.currentUser, content: msg});
+    vm.appendMessageUpToLimit(msg);
   });
 
 });
