@@ -1,3 +1,29 @@
-.wrapper {
-	padding: 0 0 15px 0;
+.arrow_box {
+    position: relative;
+    background: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 10px ;
+}
+.arrow_box:after, .arrow_box:before {
+    top: 100%;
+    left: 30%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.arrow_box:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-top-color: #ffffff;
+    border-width: 20px;
+    margin-left: -20px;
+}
+.arrow_box:before {
+    border-color: rgba(0, 0, 0, 0);
+    border-top-color: #000000;
+    border-width: 24px;
+    margin-left: -24px;
 }
