@@ -18,23 +18,8 @@ app.get('/answer', function (req, res) {
 })
 
 io.on('connection', function(socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.emit('newcomer', { order: '3' });
-  socket.on('login', function(username, callback) {
-    if (socket.username) return;
-
-    console.log('add a user:', username);
-    socket.username = username;
-    callback && callback();
-    socket.broadcast.emit('new user', { username: username });
-  });
-
-  socket.on('lobby message', function(message) {
-    if (!socket.username) return;
-    if (!message) return;
-
-    console.log('message: ' + message);
-    socket.broadcast.emit('lobby message', socket.username, message);
+  socket.on('chat message', function(msg) {
+    io.emit('chat message', msg);
   });
 
 });
