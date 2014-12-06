@@ -8,14 +8,14 @@ app.use(express.static(__dirname + '/public'));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 app.get('/', function (req, res) {
-  console.log(req.query)
+  console.log(req.query);
   res.sendFile(__dirname + '/public/index.html');
-})
+});
 
 app.get('/answer', function (req, res) {
-  console.log(req.query)
+  console.log(req.query);
   res.sendFile(__dirname + '/public/index.html');
-})
+});
 
 io.on('connection', function(socket) {
   socket.on('chat message', function(msg) {
