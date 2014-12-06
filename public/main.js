@@ -12,7 +12,7 @@ $(function() {
     },
     methods: {
       appendMessageUpToLimit: function(msg) {
-        if (this.messages.length > 10) {
+        if (this.messages.length > 20) {
           this.messages.shift();
         }
         this.messages.push({ user: this.currentUser, content: msg});
