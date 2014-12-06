@@ -3,14 +3,23 @@
 <head>
   <title>Solve me.</title>
   <link rel="stylesheet" href="/style.css"/>
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css"/>
 </head>
 <body>
-<ul id="messages"></ul>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <ul id="messages"></ul>
 
-<form id="chat">
-  <input id="message__input" type="text" maxlength="14" />
-  <input type="submit">
-</form>
+    <div class="form-group">
+      <form id="chat">
+        <label for="message__input">他チームと情報交換できます</label>
+        <input class="form-control" id="message__input" type="text" maxlength="14" />
+        <input class="btn btn-block btn-primary" type="submit">
+      </form>
+    </div>
+  </div>
+</div>
   <script src="/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/main.js"></script>
