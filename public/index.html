@@ -9,7 +9,16 @@
 <body>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <ul id="messages"></ul>
+  <div class="currentUser">
+  <p>
+    ここでのあなたは「{{ currentUser }}」です
+  </p>
+  </div>
+    <ul id="messages">
+      <li v-repeat="messages">
+        {{ content }} by {{ user }}
+      </li>
+    </ul>
 
     <div class="form-group">
       <form id="chat">
@@ -21,6 +30,8 @@
   </div>
 </div>
   <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/bower_components/vue/dist/vue.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/main.js"></script>
 </body>
