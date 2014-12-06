@@ -13,7 +13,12 @@ app.get('/', function (req, res) {
 });
 
 app.get('/answer', function (req, res) {
-  console.log(req.query);
+  res.sendFile(__dirname + '/public/index.html');
+});
+
+app.get('/set_timer_to_10min', function (req, res) {
+  if(req.query.a === 'kat') {
+  };
   res.sendFile(__dirname + '/public/index.html');
 });
 
