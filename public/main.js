@@ -34,7 +34,7 @@ $(function() {
         el.innerHTML = comment;
         var randomNum = Math.random();
         el.style.top = Math.floor(randomNum * 100) + "%";
-        el.style.right = 0;
+        el.style.right = '-600px';
         el.style.zIndex = 2;
         el.style.minWidth = '600px';
         el.style.position = 'absolute';
@@ -44,7 +44,7 @@ $(function() {
           {
             right: '120%'
           },
-          5000,
+          6000,
           'linear',
           function() {
             nico.removeChild(el);
