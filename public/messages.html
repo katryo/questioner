@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <title>Solve me.</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" href="/public/messages.css"/>
+</head>
+<body>
+<div class="full">
+  <div class="messages">
+    <ul>
+      <li v-repeat="messages">
+        {{ content }} by {{ user }}
+      </li>
+    </ul>
+  </div>
+  <div class="exclamation" v-if="isSurprizing">!</div>
+  <div class="person-upper">
+  </div>
+  <div class="person-lower">
+  </div>
+  <div class="person-message">
+  <h2>1号</h2>
+  <p>前から思ってたんですけど、アンジェラ・バルザックさんにわたしに似てますよねっ？</p>
+  </div>
+</div>
+  <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="/bower_components/vue/dist/vue.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/public/main.js"></script>
+</body>
+</html>

@@ -30,6 +30,9 @@ app.get('/answer', function (req, res) {
   }
 });
 
+app.get('/messages', function(req, res) {
+  res.sendFile(__dirname + '/public/messages.html');
+});
 
 app.get('/latest_user_id', function (req, res) {
   redis.get('latest_user_id', function(err, reply) {
@@ -75,8 +78,8 @@ app.get('/deadline', function (req, res) {
 });
 
 io.on('connection', function(socket) {
-  socket.on('chat message', function(msg) {
-    io.emit('chat message', msg);
+  socket.on('chat message', function(msgObj) {
+    io.emit('chat message', msgObj);
   });
 });
 
