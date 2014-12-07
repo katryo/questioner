@@ -12,10 +12,10 @@
 
 .messages {
   height: 90%;
-  min-width: 30%;
+  min-width: 40%;
   position: fixed;
   top: 5%;
-  right: 10%;
+  right: 5%;
   background-color: rgba(0,0,0,0.8);
   padding: 10px;
   color: white;
@@ -30,7 +30,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-image: url('03_tere_2.png');
+  background-image: url('01_nomal_1.png');
 }
 
 .person-lower {
@@ -42,15 +42,15 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-image: url('03_tere_2.png');
+  background-image: url('01_nomal_1.png');
 }
 
 .person-message {
-  min-height: 20%;
+  min-height: 25%;
   width: 40%;
   position: fixed;
   bottom: 5%;
-  left: 10%;
+  left: 5%;
   background-color: rgba(0,0,0,0.8);
   padding: 10px;
   color: white;

@@ -10,11 +10,12 @@ $(function() {
       messages: [],
       secondsLeft: 0,
       isSurprizing: false,
-      surprizingWords: ['1号', '１号', 'ハッカドール'],
-      angryWords: ['つまらない', 'ひどい'],
+      surprizingWords: ['ダーク'],
+      angryWords: ['かわいくない'],
       tereWords: [],
       excellentWords: ['かわいい'],
-      emotion: 'normal'
+      emotion: 'normal',
+      currentMessage: '前から思ってたんですけど、アンジェラ・バルザックさんにわたしに似てますよねっ'
     },
     methods: {
       appendMessageUpToLimit: function(msgObj) {
@@ -88,15 +89,27 @@ $(function() {
         var $lower = $('.person-lower');
         var $upper = $('.person-upper');
         $lower.css('background-image', backgroundImage);
-        $upper.fadeOut(0.4, function() {
+        $upper.fadeOut(400, function() {
           $upper.css('background-image', backgroundImage);
-          $upper.fadeIn(0.1, cb);
+          $upper.fadeIn(200, cb);
         });
       },
       ifFoundChangeEmotion: function(content) {
         this.changeEmotion(this.findSpecialWord(content, this.angryWords), this.toAngry);
+        this.changeEmotion(this.findSpecialWord(content, this.surprizingWords), this.toSurprizing);
         this.changeEmotion(this.findSpecialWord(content, this.tereWords), this.toTere);
         this.changeEmotion(this.findSpecialWord(content, this.excellentWords), this.toExcellent);
+      },
+      ifFoundChangeMessage: function(content) {
+        if(this.findSpecialWord(content, this.angryWords)) {
+          this.currentMessage = 'むっ、怒りますよ！？';
+        }
+        if(this.findSpecialWord(content, this.excellentWords)) {
+          this.currentMessage = 'わたしのこと褒めました？　ありがとうですっ！';
+        }
+        if(this.findSpecialWord(content, this.surprizingWords)) {
+          this.currentMessage = 'あれ、呼びました？';
+        }
       },
       changeEmotion: function(found, toFunc) {
         if(found) {
@@ -107,25 +120,21 @@ $(function() {
         this.changeMultiPersonImg(['03_tere_1.png', '03_tere_2.png', '03_tere_3.png']);
       },
       toExcellent: function() {
-        this.changeMultiPersonImg(['07_best_1.png', '07_best_2.png', '07_best_3.png', '07_excellent.png']);
+        this.changeMultiPersonImg(['07_best_1.png', '07_best_2.png', '07_best_3.png', '07_excellent.png', '07_best_2.png', '07_best_1.png']);
       },
       toAngry: function() {
-        this.changeMultiPersonImg(['05_angry_1.png', '05_angry_2.png', '05_angry_3.png']);
+        this.changeMultiPersonImg(['05_angry_1.png', '05_angry_2.png', '05_angry_3.png', '05_angry_2.png', '05_angry_1.png']);
+      },
+      toSurprizing: function() {
+        this.changeMultiPersonImg(['06_surprise_1.png', '06_surprise_2.png', '06_surprise_3.png']);
       },
       changeMultiPersonImg: function(images) {
-        var that = this;
-        this.changePersonImg(images[0], function() {
-          that.changePersonImg(images[1], function() {
-            if (images.length > 3) {
-              that.changePersonImg(images[2], function() {
-                that.changePersonImg(images[3]);
-              });
-            }
-            else {
-              that.changePersonImg(images[2]);
-            }
-          });
-        });
+        if (images.length === 0 ){
+          return;
+        }
+        var imagesCopied = images.concat();
+        var firstImage = imagesCopied.shift();
+        this.changePersonImg(firstImage, this.changeMultiPersonImg(imagesCopied));
       }
     },
     ready: function() {
@@ -136,8 +145,10 @@ $(function() {
   });
 
   $('form#chat').submit(function() {
-    socket.emit('chat message', { content: $message_input.val(), user: vm.currentUser});
-    $message_input.val('');
+    if($message_input.val()) {
+      socket.emit('chat message', { content: $message_input.val(), user: vm.currentUser});
+      $message_input.val('');
+    }
     return false;
   });
 
@@ -145,6 +156,7 @@ $(function() {
     vm.appendMessageUpToLimit(msgObj);
     vm.surprizeIfSurprizingWord(msgObj.content);
     vm.ifFoundChangeEmotion(msgObj.content);
+    vm.ifFoundChangeMessage(msgObj.content);
   });
 
 });

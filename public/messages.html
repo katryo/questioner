@@ -12,7 +12,7 @@
   <div class="messages">
     <ul>
       <li v-repeat="messages">
-        {{ content }} by {{ user }}
+        {{ content }}
       </li>
     </ul>
   </div>
@@ -23,7 +23,7 @@
   </div>
   <div class="person-message">
   <h2>1号</h2>
-  <p>前から思ってたんですけど、アンジェラ・バルザックさんにわたしに似てますよねっ？</p>
+  <p>{{ currentMessage }}</p>
   </div>
 </div>
   <script src="/bower_components/jquery/dist/jquery.min.js"></script>
