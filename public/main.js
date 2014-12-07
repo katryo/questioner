@@ -2,6 +2,17 @@ $(function() {
   var socket = io();
   var $window = $(window);
   var $message_input = $('#message__input');
+  var surprizingImages = ['06_surprise_1.png', '06_surprise_2.png', '06_surprise_3.png'];
+  var terImages = ['03_tere_1.png', '03_tere_2.png', '03_tere_3.png'];
+  var excellentImages = ['07_best_1.png', '07_best_2.png', '07_best_3.png', '07_excellent.png', '07_best_2.png', '07_best_1.png'];
+  var angryImages = ['05_angry_1.png', '05_angry_2.png', '05_angry_3.png', '05_angry_2.png', '05_angry_1.png'];
+  var allImages = Array.prototype.concat.apply([], [surprizingImages, terImages, excellentImages, angryImages]);
+  allImages.forEach(
+    function(fileName) {
+      var img = document.createElement('img');
+      img.src = '/public/' + fileName;
+    }
+  );
 
   var vm = new Vue({
     el: 'body',
@@ -126,7 +137,7 @@ $(function() {
         this.changeMultiPersonImg(['05_angry_1.png', '05_angry_2.png', '05_angry_3.png', '05_angry_2.png', '05_angry_1.png']);
       },
       toSurprizing: function() {
-        this.changeMultiPersonImg(['06_surprise_1.png', '06_surprise_2.png', '06_surprise_3.png']);
+        this.changeMultiPersonImg(surprizingImages);
       },
       changeMultiPersonImg: function(images) {
         if (images.length === 0 ){
