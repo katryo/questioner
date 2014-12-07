@@ -21,6 +21,13 @@
   color: white;
 }
 
+#js-messages-nico {
+  color: white;
+  font-size: 2rem;
+  text-shadow: black 1px 1px 3px;
+  z-index: 2;
+}
+
 .person-upper {
   background-size: contain;
   background-position:center center;

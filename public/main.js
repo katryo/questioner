@@ -29,6 +29,27 @@ $(function() {
       currentMessage: '前から思ってたんですけど、アンジェラ・バルザックさんにわたしに似てますよねっ'
     },
     methods: {
+      postNicoComment: function(comment) {
+        var el = document.createElement('div');
+        el.innerHTML = comment;
+        var randomNum = Math.random();
+        el.style.top = Math.floor(randomNum * 100) + "%";
+        el.style.right = 0;
+        el.style.zIndex = 2;
+        el.style.minWidth = '600px';
+        el.style.position = 'absolute';
+        var nico = document.getElementById('js-messages-nico');
+        nico.appendChild(el)
+        $(el).animate(
+          {
+            right: '120%'
+          },
+          5000,
+          'linear',
+          function() {
+            nico.removeChild(el);
+          });
+      },
       appendMessageUpToLimit: function(msgObj) {
         if (this.messages.length > 20) {
           this.messages.pop();
@@ -128,13 +149,13 @@ $(function() {
         }
       },
       toTere: function() {
-        this.changeMultiPersonImg(['03_tere_1.png', '03_tere_2.png', '03_tere_3.png']);
+        this.changeMultiPersonImg(terImages);
       },
       toExcellent: function() {
-        this.changeMultiPersonImg(['07_best_1.png', '07_best_2.png', '07_best_3.png', '07_excellent.png', '07_best_2.png', '07_best_1.png']);
+        this.changeMultiPersonImg(excellentImages);
       },
       toAngry: function() {
-        this.changeMultiPersonImg(['05_angry_1.png', '05_angry_2.png', '05_angry_3.png', '05_angry_2.png', '05_angry_1.png']);
+        this.changeMultiPersonImg(angryImages);
       },
       toSurprizing: function() {
         this.changeMultiPersonImg(surprizingImages);
@@ -165,6 +186,7 @@ $(function() {
 
   socket.on('chat message', function(msgObj) {
     vm.appendMessageUpToLimit(msgObj);
+    vm.postNicoComment(msgObj.content);
     vm.surprizeIfSurprizingWord(msgObj.content);
     vm.ifFoundChangeEmotion(msgObj.content);
     vm.ifFoundChangeMessage(msgObj.content);
