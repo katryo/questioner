@@ -10,6 +10,14 @@
   background-image: url('http://denkinovel.com/assets/seashore-with-beach-hut-117b7ad3c552c9df8c8317e0912478c6.jpg');
 }
 
+#js-bg-upper {
+  z-index: -1;
+}
+
+#js-bg-lower {
+  z-index: -2;
+}
+
 .messages {
   height: 90%;
   min-width: 40%;

@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="/public/messages.css"/>
 </head>
 <body>
-<div class="full">
   <div id="js-messages-nico">
   </div>
   <div class="messages">
@@ -24,10 +23,11 @@
   <div class="person-lower">
   </div>
   <div class="person-message">
-  <h2>1号</h2>
-  <p>{{ currentMessage }}</p>
+    <h2>1号</h2>
+    <p>{{ currentMessage }}</p>
   </div>
-</div>
+<div class="full" id="js-bg-upper"></div>
+<div class="full" id="js-bg-lower"></div>
   <script src="/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="/bower_components/vue/dist/vue.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>

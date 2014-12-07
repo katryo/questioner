@@ -6,6 +6,7 @@ $(function() {
   var terImages = ['03_tere_1.png', '03_tere_2.png', '03_tere_3.png'];
   var excellentImages = ['07_best_1.png', '07_best_2.png', '07_best_3.png', '07_excellent.png', '07_best_2.png', '07_best_1.png'];
   var angryImages = ['05_angry_1.png', '05_angry_2.png', '05_angry_3.png', '05_angry_2.png', '05_angry_1.png'];
+  var bgImages = ['park.jpg', 'room.jpg', 'school.jpg', 'seashore.jpg', 'stairs.jpg', 'station-square.jpg', 'town.jpg', 'train.jpg'];
   var allImages = Array.prototype.concat.apply([], [surprizingImages, terImages, excellentImages, angryImages]);
   allImages.forEach(
     function(fileName) {
@@ -126,6 +127,20 @@ $(function() {
           $upper.fadeIn(200, cb);
         });
       },
+      changeBg: function(imgFileName) {
+        var backgroundImage = 'url("/public/' + imgFileName + '")';
+        var $lower = $('#js-bg-lower');
+        var $upper = $('#js-bg-upper');
+        $lower.css('background-image', backgroundImage);
+        $upper.fadeOut(800, function() {
+          $upper.css('background-image', backgroundImage);
+          $upper.fadeIn(200);
+        });
+      },
+      changeBgRandomly: function() {
+        var item = bgImages[Math.floor(Math.random() * bgImages.length)];
+        this.changeBg(item);
+      },
       ifFoundChangeEmotion: function(content) {
         this.changeEmotion(this.findSpecialWord(content, this.angryWords), this.toAngry);
         this.changeEmotion(this.findSpecialWord(content, this.surprizingWords), this.toSurprizing);
@@ -186,6 +201,7 @@ $(function() {
 
   socket.on('chat message', function(msgObj) {
     vm.appendMessageUpToLimit(msgObj);
+    vm.changeBgRandomly();
     vm.postNicoComment(msgObj.content);
     vm.surprizeIfSurprizingWord(msgObj.content);
     vm.ifFoundChangeEmotion(msgObj.content);
