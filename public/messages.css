@@ -7,7 +7,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-image: url('http://denkinovel.com/assets/seashore-with-beach-hut-117b7ad3c552c9df8c8317e0912478c6.jpg');
+  background-image: url('/public/seashore.jpg');
 }
 
 #js-bg-upper {
