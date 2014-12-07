@@ -7,7 +7,7 @@ $(function() {
   var excellentImages = ['07_best_1.png', '07_best_2.png', '07_best_3.png', '07_excellent.png', '07_best_2.png', '07_best_1.png'];
   var angryImages = ['05_angry_1.png', '05_angry_2.png', '05_angry_3.png', '05_angry_2.png', '05_angry_1.png'];
   var bgImages = ['park.jpg', 'room.jpg', 'school.jpg', 'seashore.jpg', 'stairs.jpg', 'station-square.jpg', 'town.jpg', 'train.jpg'];
-  var allImages = Array.prototype.concat.apply([], [surprizingImages, terImages, excellentImages, angryImages]);
+  var allImages = Array.prototype.concat.apply([], [surprizingImages, terImages, excellentImages, angryImages, bgImages]);
   allImages.forEach(
     function(fileName) {
       var img = document.createElement('img');
