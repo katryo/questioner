@@ -23,10 +23,13 @@ app.get('/', function (req, res) {
 });
 
 app.get('/answer', function (req, res) {
-  if(req.query.a === '浜') {
-    res.sendFile(__dirname + '/public/answer.html');
+  var a = req.query.a;
+  if(a === 'vampire' || a === 'Vampire' || a === 'VAMPIRE') {
+    res.sendFile(__dirname + '/public/answer_1.html');
+  } else if(a === 'rose' || a === 'Rose' || a === 'ROSE') {
+    res.sendFile(__dirname + '/public/answer_2.html');
   } else {
-    res.sendFile(__dirname + '/public/index.html');
+    res.sendFile(__dirname + '/public/failure.html');
   }
 });
 

@@ -22,40 +22,51 @@ $(function() {
       messages: [],
       secondsLeft: 0,
       isSurprizing: false,
-      surprizingWords: ['ダーク'],
-      angryWords: ['かわいくない'],
+      surprizingWords: ['rose'],
+      angryWords: ['かわいくない', 'だめ'],
       tereWords: [],
-      excellentWords: ['かわいい'],
+      excellentWords: ['かわいい', 'すてき', 'すごい'],
       emotion: 'normal',
-      currentMessage: '前から思ってたんですけど、アンジェラ・バルザックさんにわたしに似てますよねっ'
+      currentMessage: '「いつから全チームが同じ問題yを解いていると錯覚していた？」ですっ！'
     },
     methods: {
       postNicoComment: function(comment) {
-        var el = document.createElement('div');
-        el.innerHTML = comment;
-        var randomNum = Math.random();
-        el.style.top = Math.floor(randomNum * 100) + "%";
-        el.style.right = '-600px';
-        el.style.zIndex = 2;
-        el.style.minWidth = '600px';
-        el.style.position = 'absolute';
         var nico = document.getElementById('js-messages-nico');
-        nico.appendChild(el)
-        $(el).animate(
-          {
-            right: '120%'
-          },
-          6000,
-          'linear',
-          function() {
-            nico.removeChild(el);
-          });
+        if (nico) {
+          if (this.isCensored(comment)) { comment = '<censored>'; }
+          var el = document.createElement('div');
+          el.innerHTML = comment;
+          var randomNum = Math.random();
+          el.style.top = Math.floor(randomNum * 100) + "%";
+          el.style.right = '-600px';
+          el.style.zIndex = 2;
+          el.style.minWidth = '600px';
+          el.style.position = 'absolute';
+          nico.appendChild(el);
+          $(el).animate(
+            {
+              right: '120%'
+            },
+            6000,
+            'linear',
+            function() {
+              nico.removeChild(el);
+            });
+        }
+      },
+      isCensored: function(word) {
+          if (word === 'rose' || word === 'vampire' || word === 'Rose' || word === 'Vampire') { return true; }
+          return false;
       },
       appendMessageUpToLimit: function(msgObj) {
         if (this.messages.length > 20) {
           this.messages.pop();
         }
-        this.messages.unshift({ user: msgObj.user, content: msgObj.content});
+        if (this.isCensored(msgObj.content)) { 
+          this.messages.unshift({ user: msgObj.user, content: '<censored>'});
+        } else {
+          this.messages.unshift({ user: msgObj.user, content: msgObj.content});
+        }
       },
       startTimer: function() {
         var that = this;
@@ -148,6 +159,7 @@ $(function() {
         this.changeEmotion(this.findSpecialWord(content, this.excellentWords), this.toExcellent);
       },
       ifFoundChangeMessage: function(content) {
+        console.log(content);
         if(this.findSpecialWord(content, this.angryWords)) {
           this.currentMessage = 'むっ、怒りますよ！？';
         }
@@ -155,7 +167,7 @@ $(function() {
           this.currentMessage = 'わたしのこと褒めました？　ありがとうですっ！';
         }
         if(this.findSpecialWord(content, this.surprizingWords)) {
-          this.currentMessage = 'あれ、呼びました？';
+          this.currentMessage = 'わっ、おどろきましたっ！';
         }
       },
       changeEmotion: function(found, toFunc) {
@@ -185,7 +197,6 @@ $(function() {
       }
     },
     ready: function() {
-      console.log('ready');
       this.fetchDeadline();
       this.fetchLatestUserId();
     }

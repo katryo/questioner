@@ -16,10 +16,13 @@
       <div class="currentUser alert alert-info">
         ここでのあなたは「{{ currentUser }}」ですっ！
       </div>
-      <div class="answer">
-        <h1>問題C</h1>
-        <h3>売神島日？京</h3>
-        <p>？に入る文字を答えよ</p>
+      <div class="answer panel panel-primary">
+        <div class="panel-heading">
+          <h1 class="panel-title">
+            PASSCODE?
+          </h1>
+        </div>
+      <div class="panel-body">
         <div class="form-group">
           <form action="/answer">
             <input class="form-control" type="text" name="a">
@@ -28,28 +31,35 @@
           </form>
         </div>
       </div>
-      <div class="secondsLeft">あと{{ secondsLeft }}秒</div>
-      <ul id="messages">
-        <li v-repeat="messages">
-          {{ content }} by {{ user }}
-        </li>
-      </ul>
-
-      <div class="form-group">
-        <form id="chat">
-          <label for="message__input">他チームと情報交換できますっ。問題Eについて相談するといいことあるかも？　ですっ！</label>
-          <input class="form-control" id="message__input" type="text" maxlength="30" />
-          <br/>
-          <input class="btn btn-block btn-primary btn-lg" type="submit">
-        </form>
-      </div>
-      <div class="hint">
-        <div class="arrow_box">
-          <h4>
-            「いつから全チームが同じ問題Eを解いていると錯覚していた？」ですっ！
-          </h4>
+    </div>
+      <div class="answer panel panel-info">
+        <div class="panel-heading">
+          <h1 class="panel-title">
+            Chat
+          </h1>
         </div>
-        <img src="/public/04_pose.png" alt="hackadoll" class="img-responsive">
+      <div class="panel-body">
+        <div class="form-group">
+          <form id="chat">
+            <label for="message__input">他チームと情報交換できますっ。問題yについて相談するといいことあるかも？　ですっ！</label>
+            <input class="form-control" id="message__input" type="text" maxlength="30" />
+            <br/>
+            <input class="btn btn-block btn-primary btn-lg" type="submit">
+          </form>
+        </div>
+        <ul id="messages">
+          <li v-repeat="messages">
+            {{ content }} by {{ user }}
+          </li>
+        </ul>
+        <div class="hint">
+          <div class="arrow_box">
+            <h4>
+            {{ currentMessage }}
+            </h4>
+          </div>
+          <img src="/public/04_pose.png" alt="hackadoll" class="img-responsive">
+        </div>
       </div>
     </div>
   </div>
