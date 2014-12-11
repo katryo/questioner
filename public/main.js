@@ -22,7 +22,7 @@ $(function() {
       messages: [],
       secondsLeft: 0,
       isSurprizing: false,
-      surprizingWords: ['rose'],
+      surprizingWords: ['Door', 'door', 'DOOR'],
       angryWords: ['かわいくない', 'だめ'],
       tereWords: [],
       excellentWords: ['かわいい', 'すてき', 'すごい'],
@@ -55,7 +55,7 @@ $(function() {
         }
       },
       isCensored: function(word) {
-          if (word === 'rose' || word === 'vampire' || word === 'Rose' || word === 'Vampire') { return true; }
+          if (word === 'Door' || word === 'DOOR' || word === 'vampire' || word === 'door' || word === 'Vampire') { return true; }
           return false;
       },
       appendMessageUpToLimit: function(msgObj) {
