@@ -4,7 +4,6 @@
     border: 2px solid #000000;
     border-radius: 10px ;
     margin-bottom: 50px;
-    height: 100px;
 }
 .arrow_box:after, .arrow_box:before {
     top: 100%;
@@ -40,7 +39,7 @@
 
 .js-sd-exclamation {
     position: fixed;
-    top: 20%;
+    top: 10%;
     left: 40%;
     font-size: 15rem;
     opacity: 0;
