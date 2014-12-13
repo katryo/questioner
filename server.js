@@ -26,7 +26,7 @@ app.get('/answer', function (req, res) {
   var a = req.query.a;
   if(a === 'vampire' || a === 'Vampire' || a === 'VAMPIRE') {
     res.sendFile(__dirname + '/public/answer_1.html');
-  } else if(a === 'door' || a === 'Door' || a === 'DOOR') {
+  } else if(a === 'rood' || a === 'Rood' || a === 'ROOD') {
     res.sendFile(__dirname + '/public/answer_2.html');
   } else {
     res.sendFile(__dirname + '/public/failure.html');

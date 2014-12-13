@@ -24,6 +24,7 @@
   position: fixed;
   top: 5%;
   right: 5%;
+  font-size: 2rem;
   background-color: rgba(0,0,0,0.8);
   padding: 10px;
   color: white;
