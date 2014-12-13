@@ -32,13 +32,6 @@
 
 .js-sd-figure-upper {
     z-index: 2;
-    opacity: 0;
-}
-
-.js-sd-figure-lower {
-    z-index: 1;
-    position: relative;
-    margin-top: -400px;
 }
 
 .sd-figures {

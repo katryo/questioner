@@ -142,14 +142,8 @@ $(function() {
       },
       changeSdFigureImg: function(imgFileName, cb) {
         var src = '/public/' + imgFileName;
-        var $lower = $('.js-sd-figure-lower');
         var $upper = $('.js-sd-figure-upper');
-        console.log(imgFileName);
-        $lower.attr('src', src);
-        $upper.fadeOut(400, function() {
-          $upper.attr('src', src);
-          $upper.fadeIn(200, cb);
-        });
+        $upper.attr('src', src);
       },
       changeBg: function(imgFileName) {
         var backgroundImage = 'url("/public/' + imgFileName + '")';
