@@ -195,6 +195,7 @@ $(function() {
         this.changeMessagesIfMatchWord(msgObj, 'dead', 'なんとかオブザデッドって全部でいくつあるんでしょうねっ？');
         this.changeMessagesIfMatchWord(msgObj, 'trip', '聖地巡礼の旅に出ます。探さないでくださいっ！');
         this.changeMessagesIfMatchWord(msgObj, 'year', 'コミケが終わらないと今年も終わりませんよねっ！');
+        this.changeMessagesIfMatchWord(msgObj, 'ヒント', 'ヒント？　うーん、どうしましょうねっ！');
       },
       changeMessagesIfMatchWord: function(msgObj, word, message) {
         var re = new RegExp(word, 'i');
