@@ -175,7 +175,7 @@ $(function() {
         else if(this.findSpecialWord(msgObj.content, this.surprizingWords)) {
           this.currentMessage = 'わっ、おどろきましたっ！';
           if(msgObj.user === this.currentUser) {
-            this.currentPhoneMessage = 'わっ、おどろきましたっ！　そうです、その言葉を、さかさまにしてくださいっ！';
+            this.currentPhoneMessage = 'わっ、おどろきましたっ！　そうです、その単語を、さかさまにしてくださいっ！';
             var el = $('.js-sd-exclamation');
             el.css('z-index', '3');
             el.css('opacity', '1');
