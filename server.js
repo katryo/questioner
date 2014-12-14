@@ -3,6 +3,8 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
+app.set('views', './views');
+app.set('view engine', 'jade');
 
 if (process.env.REDISTOGO_URL) {
   var rtg   = require("url").parse(process.env.REDISTOGO_URL);
@@ -10,6 +12,18 @@ if (process.env.REDISTOGO_URL) {
   redis.auth(rtg.auth.split(":")[1]);
 } else {
   var redis = require("redis").createClient();
+}
+
+if (process.env.AGENT_1) {
+  var agent1 = process.env.AGENT_1;
+} else {
+  var agent1 = '司会の人';
+}
+
+if (process.env.AGENT_2) {
+  var agent2 = process.env.AGENT_2;
+} else {
+  var agent2 = '司会の人';
 }
 
 app.use('/public', express.static(__dirname + '/public'));
@@ -24,10 +38,10 @@ app.get('/', function (req, res) {
 
 app.get('/answer', function (req, res) {
   var a = req.query.a;
-  if(a === 'vampire' || a === 'Vampire' || a === 'VAMPIRE') {
-    res.sendFile(__dirname + '/public/answer_1.html');
-  } else if(a === 'rood' || a === 'Rood' || a === 'ROOD') {
-    res.sendFile(__dirname + '/public/answer_2.html');
+  if(a.match(/vampire/i)) {
+    res.render('answer_1', { agent: agent1});
+  } else if(a.match(/rood/i)) {
+    res.render('answer_2', { agent: agent2});
   } else {
     res.sendFile(__dirname + '/public/failure.html');
   }
