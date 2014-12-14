@@ -165,41 +165,45 @@ $(function() {
         this.changeEmotion(this.findSpecialWord(content, this.tereWords), this.toTere);
         this.changeEmotion(this.findSpecialWord(content, this.excellentWords), this.toExcellent);
       },
-      ifFoundChangeMessage: function(content) {
-        console.log(content);
-        if(this.findSpecialWord(content, this.angryWords)) {
+      ifFoundChangeMessage: function(msgObj) {
+        if(this.findSpecialWord(msgObj.content, this.angryWords)) {
           this.currentMessage = 'むっ、怒りますよ！？';
         }
-        else if(this.findSpecialWord(content, this.excellentWords)) {
+        else if(this.findSpecialWord(msgObj.content, this.excellentWords)) {
           this.currentMessage = 'わたしのこと褒めました？　ありがとうですっ！';
         }
-        else if(this.findSpecialWord(content, this.surprizingWords)) {
+        else if(this.findSpecialWord(msgObj.content, this.surprizingWords)) {
           this.currentMessage = 'わっ、おどろきましたっ！';
-          this.currentPhoneMessage = 'わっ、おどろきましたっ！　そうです、その言葉を、さかさまにしてくださいっ！';
-          var el = $('.js-sd-exclamation');
-          el.css('z-index', '3');
-          el.css('opacity', '1');
-          var timerId = setInterval(function() {
-            that.isSurprizing = false;
-            clearInterval(timerId);
-            el.css('z-index', '-1');
-            el.css('opacity', '0');
-          }, 800);
+          if(msgObj.user === this.currentUser) {
+            this.currentPhoneMessage = 'わっ、おどろきましたっ！　そうです、その言葉を、さかさまにしてくださいっ！';
+            var el = $('.js-sd-exclamation');
+            el.css('z-index', '3');
+            el.css('opacity', '1');
+            var timerId = setInterval(function() {
+              that.isSurprizing = false;
+              clearInterval(timerId);
+              el.css('z-index', '-1');
+              el.css('opacity', '0');
+            }, 800);
+          }
         }
-        this.changeMessagesIfMatchWord(content, 'rose', 'バラといえばベルサイユですよねっ！');
-        this.changeMessagesIfMatchWord(content, 'taxi', 'タクシーといえば、ヤクザやニンジャと戦うやつが好きですっ！　２でしたっけ？');
-        this.changeMessagesIfMatchWord(content, 'post', '郵便局公式の年賀状テンプレート、すっごくかわいいイラストが使えたりするんですよね……');
-        this.changeMessagesIfMatchWord(content, 'east', '極東って言葉、ものすごくかっこいいと思うのはわたしだけでしょうかっ？');
-        this.changeMessagesIfMatchWord(content, 'road', 'ロードローラーだッ！　無駄無駄無駄無駄ァー！');
-        this.changeMessagesIfMatchWord(content, 'dead', 'なんとかオブザデッドって全部でいくつあるんでしょうねっ？');
-        this.changeMessagesIfMatchWord(content, 'trip', '聖地巡礼の旅に出ます。探さないでくださいっ！');
-        this.changeMessagesIfMatchWord(content, 'year', 'コミケが終わらないと今年も終わりませんよねっ！');
+        this.changeMessagesIfMatchWord(msgObj, 'rose', 'バラといえばベルサイユですよねっ！');
+        this.changeMessagesIfMatchWord(msgObj, 'taxi', 'タクシーといえば、ヤクザやニンジャと戦うやつが好きですっ！　２でしたっけ？');
+        this.changeMessagesIfMatchWord(msgObj, 'post', '郵便局公式の年賀状テンプレート、すっごくかわいいイラストが使えたりするんですよね……');
+        this.changeMessagesIfMatchWord(msgObj, 'east', '極東って言葉、ものすごくかっこいいと思うのはわたしだけでしょうかっ？');
+        this.changeMessagesIfMatchWord(msgObj, 'road', 'ロードローラーだッ！　無駄無駄無駄無駄ァー！');
+        this.changeMessagesIfMatchWord(msgObj, 'dead', 'なんとかオブザデッドって全部でいくつあるんでしょうねっ？');
+        this.changeMessagesIfMatchWord(msgObj, 'trip', '聖地巡礼の旅に出ます。探さないでくださいっ！');
+        this.changeMessagesIfMatchWord(msgObj, 'year', 'コミケが終わらないと今年も終わりませんよねっ！');
       },
-      changeMessagesIfMatchWord: function(content, word, message) {
+      changeMessagesIfMatchWord: function(msgObj, word, message) {
         var re = new RegExp(word, 'i');
-        if(content.match(re)) {
+        if(msgObj.content.match(re)) {
           this.currentMessage = message;
-          this.currentPhoneMessage = message;
+          this.toExcellent();
+          if(msgObj.user === this.currentUser) {
+            this.currentPhoneMessage = message;
+          }
         }
       },
       changeEmotion: function(found, toFunc) {
@@ -253,7 +257,7 @@ $(function() {
     vm.postNicoComment(msgObj.content);
     vm.surprizeIfSurprizingWord(msgObj.content);
     vm.ifFoundChangeEmotion(msgObj.content);
-    vm.ifFoundChangeMessage(msgObj.content);
+    vm.ifFoundChangeMessage(msgObj);
   });
 
 });
