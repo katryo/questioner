@@ -57,7 +57,9 @@ $(function() {
         }
       },
       isCensored: function(word) {
-          if (word === 'Door' || word === 'DOOR' || word === 'vampire' || word === 'door' || word === 'Vampire') { return true; }
+          if (word.match(/door/i)) { return true; }
+          if (word.match(/vampire/i)) { return true; }
+          if (word.match(/rood/i)) { return true; }
           return false;
       },
       appendMessageUpToLimit: function(msgObj) {
